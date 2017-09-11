@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -31,4 +32,13 @@ public class IndexControllerIntegrationTests {
                 .andExpect(model().attribute("message", containsString("Hello")));
     }
 
+    @Test
+    public void next() throws Exception {
+        this.mvc.perform(get("/next"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("next"))
+                .andExpect(forwardedUrl("/WEB-INF/view/next.jsp"))
+                .andExpect(model().attributeExists("message"))
+                .andExpect(model().attribute("message", equalTo("Hello! You are in new page !!")));
+    }
 }

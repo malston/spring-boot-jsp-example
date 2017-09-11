@@ -36,4 +36,10 @@ public class IndexControllerHtmlUnitTests {
         assertThat(((HtmlHeading1) page.getByXPath("//h1").get(0)).asText()).isEqualTo("Spring Boot JSP Example");
     }
 
+    @Test
+    public void next() throws Exception {
+        HtmlPage page = this.webClient.getPage("/next");
+        assertTrue(page.isHtmlPage());
+        assertThat(((HtmlHeading1) page.getByXPath("//h1").get(0)).asText()).isEqualTo("Another page");
+    }
 }
